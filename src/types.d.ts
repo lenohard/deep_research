@@ -1,50 +1,41 @@
-interface Source {
-  sourceType: "url";
+interface Resource {
   id: string;
-  url: string;
+  name: string;
+  type: string;
+  size: number;
+  status: "unprocessed" | "processing" | "completed" | "failed";
+}
+
+interface FileMeta {
+  name: string;
+  size: number;
+  type: string;
+  lastModified: number;
+}
+
+interface Knowledge {
+  id: string;
+  title: string;
+  content: string;
+  type: "file" | "url" | "knowledge";
+  fileMeta?: FileMeta;
+  url?: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+interface Source {
   title?: string;
+  content?: string;
+  url: string;
 }
 
 interface SearchTask {
-  state: "unprocessed" | "processing" | "completed";
+  state: "unprocessed" | "processing" | "completed" | "failed";
   query: string;
   researchGoal: string;
   learning: string;
   sources: Source[];
-}
-
-interface Source {
-  title?: string;
-  url: string;
-}
-
-interface ResearchHistory {
-  id: string;
-  createdAt: number;
-  updatedAt?: number;
-  title: string;
-  question: string;
-  questions: string;
-  finalReport: string;
-  query: string;
-  suggestion: string;
-  tasks: SearchTask[];
-  sources: Source[];
-  feedback: string;
-}
-
-interface Model {
-  name: string;
-  description: string;
-  displayName: string;
-  inputTokenLimit: number;
-  maxTemperature?: number;
-  outputTokenLimit: number;
-  temperature?: number;
-  topK?: number;
-  topP?: number;
-  supportedGenerationMethods: string[];
-  version: string;
 }
 
 interface PartialJson {
@@ -54,4 +45,10 @@ interface PartialJson {
     | "successful-parse"
     | "repaired-parse"
     | "failed-parse";
+}
+
+interface WebSearchResult {
+  content: string;
+  url: string;
+  title?: string;
 }

@@ -5,7 +5,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/u14app/deep-research)
 ![Docker Image Size](https://img.shields.io/docker/image-size/xiangfa/deep-research/latest)
 ![Docker Pulls](https://img.shields.io/docker/pulls/xiangfa/deep-research)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-default.svg)](https://opensource.org/licenses/MIT)
 
 [![Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=flat&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Next](https://img.shields.io/badge/Next.js-111111?style=flat&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
@@ -14,17 +14,21 @@
 
 </div>
 
-**Lightning-Fast Deep Research Reports Powered by Google Gemini**
+**Lightning-Fast Deep Research Report**
 
-Deep Research is a cutting-edge project built with Next.js 15, leveraging the power of Google Gemini models to generate in-depth research reports in approximately 2 minutes. Utilizing advanced "Thinking" and "Flash" models with internet access, Deep Research provides rapid and insightful analysis on a wide range of topics. Your privacy is paramount – all data is processed and stored locally.
+Deep Research uses a variety of powerful AI models to generate in-depth research reports in just a few minutes. It leverages advanced "Thinking" and "Task" models, combined with an internet connection, to provide fast and insightful analysis on a variety of topics. **Your privacy is paramount - all data is processed and stored locally.**
 
 ## ✨ Features
 
 - **Rapid Deep Research:** Generates comprehensive research reports in about 2 minutes, significantly accelerating your research process.
-- **Multi-platform Support**: Supports rapid deployment to Vercel, Cloudflare and other platforms.
-- **Powered by Google Gemini:** Utilizes the advanced Google Gemini models for accurate and insightful analysis.
-- **Thinking & Networking Models:** Employs sophisticated "Thinking" and "Networking" models to balance depth and speed, ensuring high-quality results quickly. Support switching research models.
-- **Canvas** Supports editing of research content, with two editing modes: WYSIWYM and Markdown. It is possible to adjust the reading level, article length and full text translation.
+- **Multi-platform Support:** Supports rapid deployment to Vercel, Cloudflare and other platforms.
+- **Powered by AI:** Utilizes the advanced AI models for accurate and insightful analysis.
+- **Support for Multi-LLM:** Supports a variety of mainstream large language models, including Gemini, OpenAI, Anthropic, Deepseek, Grok, OpenAI Compatible, OpenRouter, Ollama, etc.
+- **Support Web Search:** Supports search engines such as Searxng, Tavily, Firecrawl, Exa, Bocha, etc., allowing LLMs that do not support search to use the web search function more conveniently.
+- **Thinking & Task Models:** Employs sophisticated "Thinking" and "Task" models to balance depth and speed, ensuring high-quality results quickly. Support switching research models.
+- **Support Further Research:** You can refine or adjust the research content at any stage of the project and support re-research from that stage.
+- **Local Knowledge Base:** Supports uploading and processing text, Office, PDF and other resource files to generate local knowledge base.
+- **Artifact** Supports editing of research content, with two editing modes: WYSIWYM and Markdown. It is possible to adjust the reading level, article length and full text translation.
 - **Research History:** Support preservation of research history, you can review previous research results at any time and conduct in-depth research again.
 - **Local & Server API Support:** Offers flexibility with both local and server-side API calling options to suit your needs.
 - **Privacy-Focused:** Your data remains private and secure, as all data is stored locally on your browser.
@@ -37,10 +41,13 @@ Deep Research is a cutting-edge project built with Next.js 15, leveraging the po
 
 - [x] Support preservation of research history
 - [x] Support editing final report and search results
-- [ ] Support file upload and local knowledge base
-- [ ] Support for other LLM models
+- [x] Support for other LLM models
+- [x] Support file upload and local knowledge base
+- [ ] Support MCP
 
 ## 🚀 Getting Started
+
+### Use Free Gemini (recommend)
 
 1. Get [Gemini API Key](https://aistudio.google.com/app/apikey)
 2. One-click deployment of the project, you can choose to deploy to Vercel or Cloudflare
@@ -50,6 +57,13 @@ Deep Research is a cutting-edge project built with Next.js 15, leveraging the po
    Currently the project supports deployment to Cloudflare, but you need to follow [How to deploy to Cloudflare Pages](./docs/How-to-deploy-to-Cloudflare-Pages.md) to do it.
 
 3. Start using
+
+### Use Other LLM
+
+1. Deploy the project to Vercel or Cloudflare
+2. Set the LLM API key
+3. Set the LLM API base URL (optional)
+4. Start using
 
 ## ⌨️ Development
 
@@ -77,31 +91,7 @@ Follow these steps to get Deep Research up and running on your local browser.
 
 3. **Set up Environment Variables:**
 
-   Create a `.env` file in the root directory of your project and configure the following environment variables:
-
-   ```env
-   # (Optional) Server-side Gemini API Key (Required for server API calls)
-   GOOGLE_GENERATIVE_AI_API_KEY=
-
-   # (Optional) Server API Proxy URL. Default, `https://generativelanguage.googleapis.com`
-   API_PROXY_BASE_URL=
-
-   # (Optional) Server API Access Password for enhanced security
-   ACCESS_PASSWORD=
-
-   # (Optional) Injected script code can be used for statistics or error tracking.
-   HEAD_SCRIPTS=
-   ```
-
-   **Important Notes on Environment Variables:**
-
-   - `GOOGLE_GENERATIVE_AI_API_KEY`: **Optional but required for using the server-side API.** You need to obtain a Google Generative AI API key from [Google AI Studio](https://aistudio.google.com/). This key should be kept secret and **never committed to your public repository.**
-   - `API_PROXY_BASE_URL`: **Optional.** If you need to use a proxy server for API requests, configure this variable with your proxy server's base URL. This is relevant for server-side API calls.
-   - `ACCESS_PASSWORD`: **Optional but highly recommended for server-side deployments.** Set a strong password to protect your server-side API endpoints. This password will be required to access server-side API functionalities.
-   - `HEAD_SCRIPTS`: **Optional** Injected script code can be used for statistics or error tracking.
-
-   **Privacy Reminder:** These environment variables are primarily used for **server-side API calls**. When using the **local API mode**, no API keys or server-side configurations are needed, further enhancing your privacy.
-   **Multi-key Support:** Supports multiple keys, each key is separated by `,`, i.e. `key1,key2,key3`. **Cloudflare cannot use multi-key for the time being because the official build script does not support Next.js 15.**
+   You need to modify the file `env.tpl` to `.env`, or create a `.env` file and write the variables to this file.
 
 4. **Run the development server:**
 
@@ -110,6 +100,12 @@ Follow these steps to get Deep Research up and running on your local browser.
    ```
 
    Open your browser and visit [http://localhost:3000](http://localhost:3000) to access Deep Research.
+
+### Custom Model List
+
+The project allow custom model list, but **only works in proxy mode**. Please add an environment variable named `NEXT_PUBLIC_MODEL_LIST` in the `.env` file or environment variables page.
+
+Custom model lists use `,` to separate multiple models. If you want to disable a model, use the `-` symbol followed by the model name, i.e. `-existing-model-name`. To only allow the specified model to be available, use `-all,+new-model-name`.
 
 ## 🚢 Deployment
 
@@ -137,8 +133,8 @@ You can also specify additional environment variables:
 ```bash
 docker run -d --name deep-research \
    -p 3333:3000 \
-   -e GOOGLE_GENERATIVE_AI_API_KEY=AIzaSy... \
    -e ACCESS_PASSWORD=your-password \
+   -e GOOGLE_GENERATIVE_AI_API_KEY=AIzaSy... \
    xiangfa/deep-research
 ```
 
@@ -160,8 +156,8 @@ services:
       image: xiangfa/deep-research
       container_name: deep-research
       environment:
-         - GOOGLE_GENERATIVE_AI_API_KEY=AIzaSy...
          - ACCESS_PASSWORD=your-password
+         - GOOGLE_GENERATIVE_AI_API_KEY=AIzaSy...
       ports:
          - 3333:3000
 ```
@@ -184,25 +180,116 @@ pnpm build:export
 
 As mentioned in the "Getting Started" section, Deep Research utilizes the following environment variables for server-side API configurations:
 
-- `GOOGLE_GENERATIVE_AI_API_KEY`
-- `API_PROXY_BASE_URL`
-- `ACCESS_PASSWORD`
+Please refer to the file `env.tpl` for all available environment variables.
 
-These variables are **only required if you intend to use the server-side API calling functionality.** For local API calls, no configuration is necessary beyond setting up the project.
+**Important Notes on Environment Variables:**
+
+- **Privacy Reminder:** These environment variables are primarily used for **server-side API calls**. When using the **local API mode**, no API keys or server-side configurations are needed, further enhancing your privacy.
+
+- **Multi-key Support:** Supports multiple keys, each key is separated by `,`, i.e. `key1,key2,key3`.
+
+- **Security Setting:** By setting `ACCESS_PASSWORD`, you can better protect the security of the server API.
+
+- **Make variables effective:** After adding or modifying this environment variable, please redeploy the project for the changes to take effect.
+
+## 🪄 How it works
+
+1. **Research topic**
+
+   - Input research topic
+   - Use local research resources (optional)
+   - Start thinking (or rethinking)
+
+2. **Propose your ideas**
+
+   - The system asks questions
+     - Answer system questions (optional)
+     - Write a research plan (or rewrite the research plan)
+   - The system outputs the research plan
+     - Start in-depth research (or re-research)
+     - The system generates SERP queries
+
+3. **Information collection**
+
+   - Initial research
+     - Retrieve local research resources based on SERP queries
+     - Collect information from the Internet based on SERP queries
+   - In-depth research (this process can be repeated)
+     - Propose research suggestions (optional)
+     - Start a new round of information collection (the process is the same as the initial research)
+
+4. **Generate Final Report**
+
+   - Make a writing request (optional)
+   - Summarize all research materials into a comprehensive Markdown report
+   - Regenerate research report (optional)
+
+```mermaid
+flowchart TB
+    A[Research Topic]:::start
+
+    subgraph Propose[Propose your ideas]
+        B1[System asks questions]:::process
+        B2[System outputs the research plan]:::process
+        B3[System generates SERP queries]:::process
+        B1 --> B2
+        B2 --> B3
+    end
+
+    subgraph Collect[Information collection]
+        C1[Initial research]:::collection
+        C1a[Retrieve local research resources based on SERP queries]:::collection
+        C1b[Collect information from the Internet based on SERP queries]:::collection
+        C2[In-depth research]:::recursive
+        Refine{More in-depth research needed?}:::decision
+
+        C1 --> C1a
+        C1 --> C1b
+        C1a --> C2
+        C1b --> C2
+        C2 --> Refine
+        Refine -->|Yes| C2
+    end
+
+    Report[Generate Final Report]:::output
+
+    A --> Propose
+    B3 --> C1
+
+    %% Connect the exit from the loop/subgraph to the final report
+    Refine -->|No| Report
+
+    %% Styling
+    classDef start fill:#7bed9f,stroke:#2ed573,color:black
+    classDef process fill:#70a1ff,stroke:#1e90ff,color:black
+    classDef recursive fill:#ffa502,stroke:#ff7f50,color:black
+    classDef output fill:#ff4757,stroke:#ff6b81,color:black
+    classDef collection fill:#a8e6cf,stroke:#3b7a57,color:black
+    classDef decision fill:#c8d6e5,stroke:#8395a7,color:black
+
+    class A start
+    class B1,B2,B3 process
+    class C1,C1a,C1b collection
+    class C2 recursive
+    class Refine decision
+    class Report output
+```
+
+## 🙋 FAQs
+
+**Why does my Ollama or SearXNG not work properly and displays the error `TypeError: Failed to fetch`?**
+
+If your request generates `CORS` due to browser security restrictions, you need to configure parameters for Ollama or SearXNG to allow cross-domain requests. You can also consider using the server proxy mode, which is a backend server that makes requests, which can effectively avoid cross-domain issues.
 
 ## 🛡️ Privacy
 
-Deep Research is designed with your privacy in mind. **All research data and generated reports are stored locally on your machine.** We do not collect or transmit any of your research data to external servers (unless you are explicitly using server-side API calls, in which case data is sent to Google's Gemini API through your configured proxy if any). Your privacy is our priority.
-
-## 📝 License
-
-Deep Research is released under the [MIT License](LICENSE). This license allows for free use, modification, and distribution for both commercial and non-commercial purposes.
+Deep Research is designed with your privacy in mind. **All research data and generated reports are stored locally on your machine.** We do not collect or transmit any of your research data to external servers (unless you are explicitly using server-side API calls, in which case data is sent to API through your configured proxy if any). Your privacy is our priority.
 
 ## 🙏 Acknowledgements
 
 - [Next.js](https://nextjs.org/) - The React framework for building performant web applications.
 - [Shadcn UI](https://ui.shadcn.com/) - Beautifully designed components that helped streamline the UI development.
-- [Google Gemini](https://ai.google.dev/gemini-api) - Powering the intelligent research capabilities of Deep Research.
+- [AI SDKs](https://sdk.vercel.ai) - Powering the intelligent research capabilities of Deep Research.
 - [Deep Research](https://github.com/dzhng/deep-research) - Thanks to the project `dzhng/deep-research` for inspiration.
 
 ## 🤝 Contributing
@@ -219,3 +306,7 @@ For major changes, please open an issue first to discuss your proposed changes.
 ## ✉️ Contact
 
 If you have any questions, suggestions, or feedback, please create a new [issue](https://github.com/u14app/deep-research/issues).
+
+## 📝 License
+
+Deep Research is released under the [MIT License](LICENSE). This license allows for free use, modification, and distribution for both commercial and non-commercial purposes.

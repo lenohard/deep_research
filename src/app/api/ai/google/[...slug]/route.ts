@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { shuffle } from "radash";
+import { GEMINI_BASE_URL } from "@/constants/urls";
 
 export const runtime = "edge";
 export const preferredRegion = [
@@ -13,10 +13,10 @@ export const preferredRegion = [
   "kix1",
 ];
 
-const GOOGLE_GENERATIVE_AI_API_KEY =
-  process.env.GOOGLE_GENERATIVE_AI_API_KEY || "";
 const API_PROXY_BASE_URL =
-  process.env.API_PROXY_BASE_URL || "https://generativelanguage.googleapis.com";
+  process.env.API_PROXY_BASE_URL ||
+  process.env.GOOGLE_GENERATIVE_AI_API_BASE_URL ||
+  GEMINI_BASE_URL;
 
 async function handler(req: NextRequest) {
   let body;
@@ -27,8 +27,6 @@ async function handler(req: NextRequest) {
   const path = searchParams.getAll("slug");
   searchParams.delete("slug");
   const params = searchParams.toString();
-  // Support multi-key polling,
-  const apiKeys = shuffle(GOOGLE_GENERATIVE_AI_API_KEY.split(","));
 
   try {
     let url = `${API_PROXY_BASE_URL}/${decodeURIComponent(path.join("/"))}`;
@@ -39,7 +37,7 @@ async function handler(req: NextRequest) {
         "Content-Type": req.headers.get("Content-Type") || "application/json",
         "x-goog-api-client":
           req.headers.get("x-goog-api-client") || "genai-js/0.24.0",
-        "x-goog-api-key": apiKeys[0],
+        "x-goog-api-key": req.headers.get("x-goog-api-key") || "",
       },
     };
     if (body) payload.body = JSON.stringify(body);

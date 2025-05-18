@@ -114,6 +114,10 @@
   }
 }
 
+@page {
+  size: "A4";
+}
+
 .float-menu-button {
   @apply w-8 h-8 hover:bg-transparent text-slate-600 hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-50;
 }
@@ -123,5 +127,15 @@
 }
 
 .from-item {
-  @apply grid grid-cols-4 gap-4 space-y-0 items-center;
+  @apply grid grid-cols-4 gap-2 max-sm:gap-1 space-y-0 items-center;
+}
+
+.text-line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
